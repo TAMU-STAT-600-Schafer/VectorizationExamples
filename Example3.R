@@ -1,48 +1,31 @@
-# Given p-dim vector, want to calculate matrix with x, x^2, x^3 up to specified degree.
+# Given p-dim vector, want to calculate matrix with x, x^2, x^3 up to 
+# specified degree (quasi-Vandermonde matrix).
 # Each each column is a particular power.
 ## INPUT
 # x - vector
 # dg - integer, maximal power
+#
+# OUTPUT
+# pw - Matrix with columns [x, x^2, ..., x^dg]
+
 powers1 <- function(x, dg){
-  pw <- matrix(x, nrow = length(x))
-  prod <- x # current product
-  for (i in 2:dg){
-    prod <- prod * x
-    pw <- cbind(pw, prod)
-  }
-  return(pw)
+  # [ToDo] Code using for loop and cbind() 
 }
 
-# Create a version of this function that only does matrix operations (matrix of powers)
+
 powers2 <- function(x, dg){
-  p = length(x)
-  pw = matrix(x, nrow = p, ncol = dg)^matrix(1:dg, p, dg, byrow = T)
-  return(pw)
+  # [ToDo] a version of this function that only does matrix operations (matrix of powers)
 }
 
-# Create a version of this function that is in between: still for loop over dg, but avoids cbind
 powers3 <- function(x, dg){
-  # Pre-allocate the space for the whole matrix
-  pw <- matrix(x, nrow = length(x), ncol = dg)
-  prod <- x # current product
-  for (i in 2:dg){
-    prod <- prod * x
-    # Put the current product into the ith column of pw
-    pw[, i] <- prod
-  }
-  return(pw)
-  
-  return(pw)
+  # [ToDo] Code using for loop but not
 }
 
 # An example
-x = runif(1000000)
-out1 = powers1(x, 8)
-out2 = powers2(x, 8)
-library(microbenchmark)
-microbenchmark(
-  powers1(x, 8),
-  powers2(x, 8),
-  powers3(x, 8),
-  times = 10
-)
+
+# [ToDo] Create a vector x of size 1 million of normal variables
+
+# [ToDo] Verify that all functions return the same output
+
+
+# [ToDo] Use microbenchmark package to compare three functions in terms of speed

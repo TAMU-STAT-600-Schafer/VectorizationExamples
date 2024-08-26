@@ -14,33 +14,28 @@ require(mnormt) # for multivariate normal data generation
 
 classify_for <- function(beta, xtrain, ytrain, xtest, ytest){
   # [ToDo] Code discriminant analysis classifier using for loop
+  
   # Calculate sample means based on training data
-  xbar1 = colMeans(xtrain[ytrain == 1, , drop = F])
-  xbar2 = colMeans(xtrain[ytrain == 2, , drop = F])
+  
+  
   # Calculate class assignments for xtest in a for loop
-  ntest = nrow(xtest)
-  ypred = rep(NA, ntest) #placeholder for classes
-  for (i in 1:ntest){
-    # Calculate distance for each class
-    dist1 = (crossprod(xtest[i, ], beta) - crossprod(xbar1, beta))^2
-    dist2 = (crossprod(xtest[i, ], beta) - crossprod(xbar2, beta))^2
-    # Assign based on the minimum
-    ypred[i] = which.min(dist1, dist2)
-  }
   
   # Calculate % error using ytest
-  error = (sum(ypred != ytest)/ntest) * 100
   
-  # Return a vector of predictions (ypred) and error %
+  # Return predictions and error
   return(list(ypred = ypred, error = error))
 }
 
 classify_vec <- function(beta, xtrain, ytrain, xtest, ytest){
-  # [ToDo] Try to create vectorized version of classifyV_for
+  # [ToDo] Try to create vectorized version of classify_for
+  
+  # Calculate sample means based on training data
+  
+  # Calculate class assignments for xtest using matrix and vector algebra
   
   # Calculate % error using ytest
-
-  # Return a vector of predictions (ypred) and error %
+  
+  # Return predictions and error
   return(list(ypred = ypred, error = error))
 }
 
@@ -86,11 +81,6 @@ out2 = classify_vec(beta, xtrain, ytrain, xtest, ytest)
 
 # [ToDo] Verify the assignments agree with each other
 
-
 # [ToDo] Use microbenchmark package to compare the timing
 
 library(microbenchmark)
-microbenchmark(
-  classify_for(beta, xtrain, ytrain, xtest, ytest),
-  classify_vec(beta, xtrain, ytrain, xtest, ytest)
-)
